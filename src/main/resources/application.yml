@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    url: jdbc:mysql://dbserver:3306/miaosha?useUnicode=true&amp;characterEncoding=utf8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    druid:
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: true
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      test-While-Idle: true
+      test-on-return: false
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,wall,log4j,config
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrypt=false
+  redis:
+    host: 192.168.9.51
+    port: 6379
+    password: 123456
+    jedis:
+      pool:
+        max-idle: 4000
+        min-idle: 4000
+        max-wait: Duration.ofMillis(20)
+
+
+mybatis:
+  type-aliases-package: cn.binux.pojo
+  mapper-locations: classpath:mapper/*.xml
+
+#检测恶意IP，多少秒被出现多少次请求
+ip_black_times: 10
+ip_black_seconds: 10
+#检测恶意IP，多少秒被出现多少次请求
+user_black_times: 10
+user_black_seconds: 10
